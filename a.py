@@ -9,4 +9,4 @@ kw=input('Search: ')
 result=mysearch(kw)
 print(len(result),'for',kw)
 for i in result:
-    print(i.replace(kw,'|%s|'%kw))
+    print(i)
