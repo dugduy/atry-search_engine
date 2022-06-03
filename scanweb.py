@@ -1,5 +1,6 @@
 from itertools import product
 from requests import get
+from threading import Thread
 tlds=open('./all_tld.txt').read().splitlines()
 mystr='abcdefghijklmnopqrstuvwxyz1234567890'
 def checkadm(dm):
@@ -13,4 +14,4 @@ for i in range(1,5):
     for j in product(mystr,repeat=i):
         for tld in tlds:
             crdm='http://'+''.join(j)+'.'+tld
-            print()
+            Thread(target=checkadm,args=(crdm,)).start()
