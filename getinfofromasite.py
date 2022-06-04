@@ -1,10 +1,12 @@
 from requests import get
 from bs4 import BeautifulSoup
 from json import dump
-site='youtube.com'
+from threading import Thread
+# site='youtube.com'
 def getinfofrom(site):
-    res=get('http://'+site)
-    print(res)
+    print(site)
+    res=get(site)
+    # print(res)
     soup=BeautifulSoup(res.text,'lxml')
     # print(soup.prettify())
     data={'name':site}
@@ -18,3 +20,6 @@ def getinfofrom(site):
         print(kws[0]['content'])
         data['keywords']=kws[0]['content']
     dump(data,open('./knw_sites/'+site,'w',encoding='utf8'))
+for i in open('./found.txt').read().splitlines():
+    Thread(target=getinfofrom,args=(i,)).start()
+    # getinfofrom(i)
